@@ -1,39 +1,27 @@
 import React, { useState, useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, Wind, Clock, Calendar, Sparkles } from 'lucide-react';
+import { Search, X, Wind, Clock, Calendar, Sparkles, MoveRight } from 'lucide-react';
 
 // --- DATA SECTION ---
 const fragrances = [
-  { id: 1, name: "Sauvage", brand: "Dior", image: "https://fimgs.net/mdimg/perfume/m.31861.jpg", topNotes: ["Bergamot"], middleNotes: ["Sichuan Pepper", "Lavender"], baseNotes: ["Ambroxan"], longevity: "8-10h", season: "All Year", occasion: "Daily" },
-  { id: 2, name: "Aventus", brand: "Creed", image: "https://fimgs.net/mdimg/perfume/m.9828.jpg", topNotes: ["Pineapple", "Bergamot"], middleNotes: ["Birch", "Patchouli"], baseNotes: ["Musk", "Ambergris"], longevity: "10h+", season: "Spring", occasion: "Success" },
-  { id: 3, name: "Bleu de Chanel", brand: "Chanel", image: "https://fimgs.net/mdimg/perfume/m.25967.jpg", topNotes: ["Grapefruit", "Lemon"], middleNotes: ["Ginger", "Jasmine"], baseNotes: ["Incense", "Sandalwood"], longevity: "8h", season: "All Year", occasion: "Office" },
-  { id: 4, name: "Eros", brand: "Versace", image: "https://fimgs.net/mdimg/perfume/m.16657.jpg", topNotes: ["Mint", "Apple"], middleNotes: ["Tonka Bean", "Ambroxan"], baseNotes: ["Vanilla", "Cedar"], longevity: "10h", season: "Winter", occasion: "Clubbing" },
-  { id: 5, name: "Le Male Elixir", brand: "JPG", image: "https://fimgs.net/mdimg/perfume/m.79350.jpg", topNotes: ["Lavender", "Mint"], middleNotes: ["Vanilla"], baseNotes: ["Honey", "Tobacco"], longevity: "12h+", season: "Winter", occasion: "Date" },
-  { id: 6, name: "Layton", brand: "Parfums de Marly", image: "https://fimgs.net/mdimg/perfume/m.40344.jpg", topNotes: ["Apple", "Lavender"], middleNotes: ["Jasmine", "Violet"], baseNotes: ["Vanilla", "Pepper"], longevity: "9h", season: "Fall", occasion: "Evening" },
-  { id: 7, name: "Tobacco Vanille", brand: "Tom Ford", image: "https://fimgs.net/mdimg/perfume/m.1825.jpg", topNotes: ["Tobacco Leaf"], middleNotes: ["Vanilla", "Cacao"], baseNotes: ["Dried Fruits"], longevity: "12h", season: "Winter", occasion: "Luxury" },
-  { id: 8, name: "Y EDP", brand: "YSL", image: "https://fimgs.net/mdimg/perfume/m.50705.jpg", topNotes: ["Apple", "Ginger"], middleNotes: ["Sage", "Juniper"], baseNotes: ["Amberwood"], longevity: "10h", season: "All Year", occasion: "Versatile" },
-  { id: 9, name: "Naxos", brand: "Xerjoff", image: "https://fimgs.net/mdimg/perfume/m.30454.jpg", topNotes: ["Lavender", "Lemon"], middleNotes: ["Honey", "Cinnamon"], baseNotes: ["Tobacco", "Vanilla"], longevity: "12h+", season: "Fall/Winter", occasion: "Special" },
-  { id: 10, name: "Stronger With You", brand: "Armani", image: "https://fimgs.net/mdimg/perfume/m.45258.jpg", topNotes: ["Cardamom"], middleNotes: ["Sage"], baseNotes: ["Chestnut", "Vanilla"], longevity: "9h", season: "Winter", occasion: "Date Night" },
-  { id: 11, name: "Light Blue", brand: "D&G", image: "https://fimgs.net/mdimg/perfume/m.44527.jpg", topNotes: ["Grapefruit"], middleNotes: ["Juniper"], baseNotes: ["Musk"], longevity: "5h", season: "Summer", occasion: "Beach" },
-  { id: 12, name: "Spicebomb Extreme", brand: "V&R", image: "https://fimgs.net/mdimg/perfume/m.30449.jpg", topNotes: ["Black Pepper"], middleNotes: ["Cumin"], baseNotes: ["Tobacco", "Vanilla"], longevity: "10h", season: "Winter", occasion: "Night" },
-  { id: 13, name: "Ombré Leather", brand: "Tom Ford", image: "https://fimgs.net/mdimg/perfume/m.49238.jpg", topNotes: ["Cardamom"], middleNotes: ["Leather", "Jasmine"], baseNotes: ["Amber", "Moss"], longevity: "10h", season: "Fall", occasion: "Signature" },
-  { id: 14, name: "The Most Wanted", brand: "Azzaro", image: "https://fimgs.net/mdimg/perfume/m.66826.jpg", topNotes: ["Cardamom"], middleNotes: ["Toffee"], baseNotes: ["Amberwood"], longevity: "9h", season: "Winter", occasion: "Date" },
-  { id: 15, name: "L'Homme Ideal", brand: "Guerlain", image: "https://fimgs.net/mdimg/perfume/m.25306.jpg", topNotes: ["Citrus", "Rosemary"], middleNotes: ["Almond", "Tonka"], baseNotes: ["Leather", "Cedar"], longevity: "8h", season: "Spring/Fall", occasion: "Business" },
-  { id: 16, name: "Acqua di Gio", brand: "Armani", image: "https://fimgs.net/mdimg/perfume/m.410.jpg", topNotes: ["Sea Notes", "Lime"], middleNotes: ["Jasmine", "Peach"], baseNotes: ["Cedar", "Musk"], longevity: "6h", season: "Summer", occasion: "Fresh" },
-  { id: 17, name: "Grand Soir", brand: "MFK", image: "https://fimgs.net/mdimg/perfume/m.40814.jpg", topNotes: ["Labdanum"], middleNotes: ["Benzoin"], baseNotes: ["Amber", "Vanilla"], longevity: "12h", season: "Winter", occasion: "Formal" },
-  { id: 18, name: "Baccarat Rouge 540", brand: "MFK", image: "https://fimgs.net/mdimg/perfume/m.33531.jpg", topNotes: ["Saffron", "Jasmine"], middleNotes: ["Amberwood"], baseNotes: ["Fir Resin"], longevity: "12h+", season: "All Year", occasion: "Luxury" },
-  { id: 19, name: "Luna Rossa Ocean", brand: "Prada", image: "https://fimgs.net/mdimg/perfume/m.68606.jpg", topNotes: ["Bergamot"], middleNotes: ["Iris", "Lavender"], baseNotes: ["Caramel"], longevity: "7h", season: "Spring", occasion: "Clean" },
-  { id: 20, name: "Interlude Man", brand: "Amouage", image: "https://fimgs.net/mdimg/perfume/m.15294.jpg", topNotes: ["Oregano", "Pepper"], middleNotes: ["Incense", "Amber"], baseNotes: ["Leather", "Oud"], longevity: "15h+", season: "Winter", occasion: "Bold" },
+  { id: 1, name: "Sauvage", brand: "Dior", image: "https://www.dior.com/dw/image/v2/BBDL_PRD/on/demandware.static/-/Sites-master_dior/default/dw646927a3/assets/Y0996004/Y0996004_E01.jpg", topNotes: ["Calabrian Bergamot", "Pepper"], middleNotes: ["Sichuan Pepper", "Lavender"], baseNotes: ["Ambroxan", "Cedar"], longevity: "8-10h", season: "All Year", occasion: "Versatile" },
+  { id: 2, name: "Aventus", brand: "Creed", image: "https://fimgs.net/mdimg/perfume/m.9828.jpg", topNotes: ["Pineapple", "Black Currant"], middleNotes: ["Birch", "Patchouli"], baseNotes: ["Musk", "Oak Moss"], longevity: "10h+", season: "Spring/Summer", occasion: "Success" },
+  { id: 3, name: "Bleu de Chanel", brand: "Chanel", image: "https://www.chanel.com/images/t_one/t_fragrance_v2/q_auto:good,f_auto,fl_lossy,dpr_1.1/w_620/bleu-de-chanel-eau-de-parfum-spray-100ml-v3-packshot-107360-9533350281246.jpg", topNotes: ["Grapefruit", "Lemon"], middleNotes: ["Ginger", "Nutmeg"], baseNotes: ["Incense", "Sandalwood"], longevity: "8-9h", season: "All Year", occasion: "Professional" },
+  { id: 4, name: "Eros", brand: "Versace", image: "https://fimgs.net/mdimg/perfume/m.16657.jpg", topNotes: ["Mint", "Green Apple"], middleNotes: ["Tonka Bean", "Geranium"], baseNotes: ["Madagascar Vanilla", "Cedar"], longevity: "10h", season: "Winter", occasion: "Night Out" },
+  { id: 5, name: "Tobacco Vanille", brand: "Tom Ford", image: "https://fimgs.net/mdimg/perfume/m.1825.jpg", topNotes: ["Tobacco Leaf", "Spice"], middleNotes: ["Vanilla", "Cacao"], baseNotes: ["Dried Fruits", "Woody Notes"], longevity: "12h+", season: "Winter", occasion: "Formal Luxury" },
+  { id: 6, name: "Naxos", brand: "Xerjoff", image: "https://fimgs.net/mdimg/perfume/m.30454.jpg", topNotes: ["Lavender", "Bergamot"], middleNotes: ["Honey", "Cinnamon"], baseNotes: ["Tobacco", "Vanilla"], longevity: "12h", season: "Fall/Winter", occasion: "Signature" },
 ];
 
 const creators = [
-  { name: "Jeremy Fragrance", desc: "The number one fragrance icon.", bgImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000" },
-  { name: "TheCologneBoy", desc: "Street interviews and mass appeal.", bgImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=1000" },
-  { name: "Noel Thomas", desc: "The king of aesthetic niche reviews.", bgImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000" }
+  { name: "Jeremy Fragrance", desc: "The world's most recognizable fragrance personality, focusing on power and mass-appeal.", bgImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2000" },
+  { name: "TheCologneBoy", desc: "Specialist in street reactions and identifying what scents genuinely attract attention in the real world.", bgImage: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=2000" },
+  { name: "Noel Thomas", desc: "Curator of niche aesthetics, focusing on the artistry and 'vibe' of high-end perfumery.", bgImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2000" }
 ];
 
-// --- APP COMPONENT ---
+// --- STYLES ---
+const glassStyle = "bg-white/[0.02] border border-white/10 backdrop-blur-md";
+
 function FragranceExplorer() {
   const [activeTab, setActiveTab] = useState('discover');
   const [searchTerm, setSearchTerm] = useState('');
@@ -41,58 +29,65 @@ function FragranceExplorer() {
 
   const filteredFragrances = useMemo(() => {
     return fragrances.filter(f => 
-      f.name.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
-      f.brand.toLowerCase().startsWith(searchTerm.toLowerCase())
+      f.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      f.brand.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-amber-500/30">
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/80 backdrop-blur-2xl">
-        <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
-          <h1 className="text-xl font-bold tracking-[0.3em] bg-gradient-to-r from-amber-200 to-yellow-600 bg-clip-text text-transparent">
-            FRAGRANCE EXPLORER
-          </h1>
-          <div className="flex gap-10 text-xs tracking-widest font-semibold uppercase">
-            <button onClick={() => setActiveTab('discover')} className={activeTab === 'discover' ? 'text-amber-400' : 'text-gray-500 hover:text-white transition-colors'}>Discover</button>
-            <button onClick={() => setActiveTab('creators')} className={activeTab === 'creators' ? 'text-amber-400' : 'text-gray-500 hover:text-white transition-colors'}>Creators</button>
+    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] font-light selection:bg-amber-200/20 overflow-x-hidden">
+      
+      {/* HEADER */}
+      <nav className="fixed top-0 w-full z-[100] border-b border-white/5 bg-black/40 backdrop-blur-3xl">
+        <div className="max-w-[1600px] mx-auto px-10 h-24 flex items-center justify-between">
+          <div className="flex flex-col leading-none">
+            <span className="text-xl font-bold tracking-[0.4em] text-white">FRAGRANCE</span>
+            <span className="text-[10px] tracking-[0.8em] text-amber-500 font-black ml-1">EXPLORER</span>
+          </div>
+          
+          <div className="flex gap-12 text-[11px] tracking-[0.3em] font-bold uppercase">
+            <button onClick={() => setActiveTab('discover')} className={`transition-all ${activeTab === 'discover' ? 'text-white border-b border-amber-500 pb-1' : 'text-gray-500 hover:text-white'}`}>Discover</button>
+            <button onClick={() => setActiveTab('creators')} className={`transition-all ${activeTab === 'creators' ? 'text-white border-b border-amber-500 pb-1' : 'text-gray-500 hover:text-white'}`}>Creators</button>
           </div>
         </div>
       </nav>
 
-      <main className="pt-32 pb-20 px-8 max-w-7xl mx-auto">
+      <main className="pt-40 pb-20 px-10 max-w-[1600px] mx-auto">
         {activeTab === 'discover' ? (
           <>
-            <div className="relative max-w-xl mx-auto mb-20 group">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-amber-500 transition-colors" size={20} />
+            {/* SEARCH BAR */}
+            <div className="relative max-w-3xl mx-auto mb-32">
               <input 
                 type="text" 
-                placeholder="Search by name or letter..." 
-                className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-16 focus:outline-none focus:border-amber-500/50 transition-all text-lg backdrop-blur-lg"
+                placeholder="SEARCH SCENTS..." 
+                className="w-full bg-transparent border-b border-white/20 py-6 px-4 focus:outline-none focus:border-amber-500 transition-all text-2xl font-extralight tracking-widest placeholder:text-gray-800 uppercase"
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
+              <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-700" size={24} />
             </div>
 
-            <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {/* GRID */}
+            <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
               <AnimatePresence mode='popLayout'>
                 {filteredFragrances.map((frag) => (
                   <motion.div
                     key={frag.id}
                     layout
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    whileHover={{ y: -8 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    whileHover={{ y: -15 }}
                     onClick={() => setSelectedFragrance(frag)}
-                    className="cursor-pointer bg-white/[0.03] p-8 rounded-[2rem] border border-white/5 hover:bg-white/[0.07] transition-all group relative overflow-hidden"
+                    className={`group cursor-pointer rounded-sm overflow-hidden p-10 transition-all duration-500 ${glassStyle}`}
                   >
-                    <div className="aspect-[4/5] mb-8 flex items-center justify-center relative z-10">
-                      <img src={frag.image} alt={frag.name} className="h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] group-hover:scale-105 transition-transform duration-700" />
+                    <div className="aspect-[3/4] mb-12 flex items-center justify-center relative">
+                      {/* Suble Glow behind bottle */}
+                      <div className="absolute inset-0 bg-amber-500/5 blur-[100px] rounded-full group-hover:bg-amber-500/10 transition-colors" />
+                      <img src={frag.image} alt={frag.name} className="h-full object-contain relative z-10 transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl" />
                     </div>
-                    <div className="relative z-10 text-center">
-                      <h3 className="text-lg font-bold mb-1 tracking-tight">{frag.name}</h3>
-                      <p className="text-amber-500/60 text-[10px] uppercase tracking-[0.2em] font-black">{frag.brand}</p>
+                    <div className="border-t border-white/5 pt-6 text-center">
+                      <p className="text-[10px] text-amber-500 font-black tracking-[0.4em] mb-2 uppercase">{frag.brand}</p>
+                      <h3 className="text-xl font-medium tracking-tight text-white group-hover:tracking-widest transition-all duration-500 uppercase">{frag.name}</h3>
                     </div>
                   </motion.div>
                 ))}
@@ -100,59 +95,90 @@ function FragranceExplorer() {
             </motion.div>
           </>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {creators.map((creator) => (
-              <div key={creator.name} className="relative h-[500px] rounded-[2.5rem] overflow-hidden group border border-white/5">
-                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110 opacity-40" style={{ backgroundImage: `url(${creator.bgImage})` }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                <div className="absolute bottom-10 left-10 right-10">
-                  <h2 className="text-3xl font-bold mb-3">{creator.name}</h2>
-                  <p className="text-gray-400 text-sm leading-relaxed">{creator.desc}</p>
+          /* CREATORS TAB */
+          <div className="grid grid-cols-1 gap-20">
+            {creators.map((creator, i) => (
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                className="relative h-[70vh] w-full flex items-center px-20 overflow-hidden rounded-lg border border-white/5"
+                key={i}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center grayscale opacity-20 transition-all duration-1000 hover:grayscale-0 hover:opacity-40" 
+                  style={{ backgroundImage: `url(${creator.bgImage})` }} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-transparent" />
+                
+                <div className="relative z-10 max-w-xl">
+                  <h2 className="text-7xl font-bold mb-6 tracking-tighter text-white uppercase italic">{creator.name}</h2>
+                  <p className="text-lg text-gray-400 font-light leading-relaxed mb-8">{creator.desc}</p>
+                  <button className="flex items-center gap-4 text-xs tracking-[0.5em] font-bold text-amber-500 uppercase hover:text-white transition-colors group">
+                    View Favorites <MoveRight className="group-hover:translate-x-4 transition-transform" />
+                  </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}
       </main>
 
-      {/* Modal View */}
+      {/* DETAIL MODAL */}
       <AnimatePresence>
         {selectedFragrance && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl">
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-[#0f0f0f] max-w-4xl w-full rounded-[3rem] overflow-hidden relative border border-white/10 shadow-2xl">
-              <button onClick={() => setSelectedFragrance(null)} className="absolute top-8 right-8 z-50 p-3 bg-white/5 rounded-full hover:bg-white/10 transition-colors"><X size={20}/></button>
-              <div className="grid md:grid-cols-2">
-                <div className="bg-white flex items-center justify-center p-16">
-                  <img src={selectedFragrance.image} className="max-h-[400px] object-contain drop-shadow-2xl" />
-                </div>
-                <div className="p-12">
-                  <span className="text-amber-500 text-[10px] tracking-[0.4em] font-black uppercase mb-4 block">{selectedFragrance.brand}</span>
-                  <h2 className="text-4xl font-bold mb-10 tracking-tight">{selectedFragrance.name}</h2>
-                  <div className="space-y-6">
-                    <div>
-                      <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-2 font-bold">The Scent Profile</p>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedFragrance.topNotes.map(n => <span key={n} className="px-3 py-1 bg-white/5 rounded-lg text-xs">{n}</span>)}
-                        {selectedFragrance.middleNotes.map(n => <span key={n} className="px-3 py-1 bg-white/5 rounded-lg text-xs">{n}</span>)}
-                        {selectedFragrance.baseNotes.map(n => <span key={n} className="px-3 py-1 bg-white/5 rounded-lg text-xs opacity-60">{n}</span>)}
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/90 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }} 
+              animate={{ scale: 1, y: 0 }} 
+              className="bg-[#0a0a0a] max-w-6xl w-full h-[85vh] rounded-sm overflow-hidden flex flex-col md:flex-row relative border border-white/10"
+            >
+              <button onClick={() => setSelectedFragrance(null)} className="absolute top-10 right-10 z-50 text-white/50 hover:text-white transition-colors"><X size={32} strokeWidth={1} /></button>
+              
+              <div className="flex-1 bg-white p-20 flex items-center justify-center">
+                <img src={selectedFragrance.image} className="max-h-full object-contain drop-shadow-2xl scale-125" />
+              </div>
+              
+              <div className="flex-1 p-20 flex flex-col justify-center">
+                <p className="text-amber-500 font-black tracking-[0.5em] text-xs uppercase mb-4">{selectedFragrance.brand}</p>
+                <h2 className="text-6xl font-bold mb-12 tracking-tighter text-white uppercase">{selectedFragrance.name}</h2>
+                
+                <div className="space-y-12">
+                  <div>
+                    <h4 className="text-[10px] tracking-[0.4em] text-gray-500 uppercase mb-6 font-bold flex items-center gap-3">
+                      <Sparkles size={14} className="text-amber-500" /> Scent Profile
+                    </h4>
+                    <div className="grid grid-cols-2 gap-8">
+                      <div>
+                        <p className="text-xs text-white/40 uppercase mb-2">Opening</p>
+                        <p className="text-sm tracking-wide">{selectedFragrance.topNotes.join(' • ')}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-white/40 uppercase mb-2">Heart</p>
+                        <p className="text-sm tracking-wide">{selectedFragrance.middleNotes.join(' • ')}</p>
                       </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/5">
-                      <div className="text-center">
-                        <Clock size={16} className="mx-auto mb-2 text-amber-500" />
-                        <p className="text-[9px] text-gray-500 uppercase">Power</p>
-                        <p className="text-xs font-bold">{selectedFragrance.longevity}</p>
-                      </div>
-                      <div className="text-center">
-                        <Calendar size={16} className="mx-auto mb-2 text-amber-500" />
-                        <p className="text-[9px] text-gray-500 uppercase">Season</p>
-                        <p className="text-xs font-bold">{selectedFragrance.season}</p>
-                      </div>
-                      <div className="text-center">
-                        <Wind size={16} className="mx-auto mb-2 text-amber-500" />
-                        <p className="text-[9px] text-gray-500 uppercase">Occasion</p>
-                        <p className="text-xs font-bold">{selectedFragrance.occasion}</p>
-                      </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4 pt-12 border-t border-white/5">
+                    <div className="text-center group">
+                      <Clock size={20} className="mx-auto mb-3 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+                      <p className="text-[9px] text-gray-600 uppercase tracking-widest font-bold">Duration</p>
+                      <p className="text-sm text-white">{selectedFragrance.longevity}</p>
+                    </div>
+                    <div className="text-center group">
+                      <Calendar size={20} className="mx-auto mb-3 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+                      <p className="text-[9px] text-gray-600 uppercase tracking-widest font-bold">Season</p>
+                      <p className="text-sm text-white">{selectedFragrance.season}</p>
+                    </div>
+                    <div className="text-center group">
+                      <Wind size={20} className="mx-auto mb-3 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+                      <p className="text-[9px] text-gray-600 uppercase tracking-widest font-bold">Occasion</p>
+                      <p className="text-sm text-white">{selectedFragrance.occasion}</p>
                     </div>
                   </div>
                 </div>
@@ -165,7 +191,6 @@ function FragranceExplorer() {
   );
 }
 
-// --- MOUNTING ---
 const container = document.getElementById('root');
 if (container) {
   const root = createRoot(container);
