@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Wind, Clock, Calendar, Sparkles } from 'lucide-react';
-import { fragrances, creators } from './data';
+import { fragrances } from './fragrances.js';
 
 const FragranceExplorer = () => {
     const [activeTab, setActiveTab] = useState('discover');
