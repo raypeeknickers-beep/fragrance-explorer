@@ -26,7 +26,19 @@ const fragrances = [
   { id: 18, type: "Designer", name: "Prada L'Homme", brand: "Prada", topNotes: "Neroli, Pepper", middleNotes: "Iris, Amber", baseNotes: "Patchouli", longevity: "7h", season: "Spring/Summer", occasion: "Office", dupe: "Ajmal Evoke Silver" },
   { id: 19, type: "Designer", name: "Ombré Leather", brand: "Tom Ford", topNotes: "Cardamom", middleNotes: "Leather, Jasmine", baseNotes: "Amber, Moss", longevity: "9h", season: "Fall/Winter", occasion: "Evening", dupe: "Afkar Leather" },
   { id: 20, type: "Designer", name: "Acqua di Gio Profondo", brand: "Armani", topNotes: "Sea Notes", middleNotes: "Rosemary", baseNotes: "Mineral Notes", longevity: "7h", season: "Summer", occasion: "Daily", dupe: "Liam Blue" },
-  // ... Adding 20 more designers like My Way Nectar, Scandal Absolu, Invictus Victory, etc.
+  { id: 2, type: "Designer", name: "Le Male In Blue", brand: "JPG", topNotes: "Mint, Bergamot, Aldehydes", middleNotes: "Lavender, Geranium, Licorice", baseNotes: "Vanilla, Tonka Bean, Benzoin", longevity: "9h", season: "Summer/Spring", occasion: "Casual/Daily", dupe: "2026 Limited Edition" },
+  { id: 3, type: "Designer", name: "Le Male Lover", brand: "JPG", topNotes: "White Pepper, Finger Lime", middleNotes: "Ambergris, Sea Notes", baseNotes: "Vanilla, Woody Notes", longevity: "8h", season: "Spring/Summer", occasion: "Date/Close Encounter", dupe: "Charnel Aquatic" },
+  { id: 4, type: "Designer", name: "Le Male Elixir", brand: "JPG", topNotes: "Lavender, Mint", middleNotes: "Vanilla, Benzoin", baseNotes: "Honey, Tonka Bean, Tobacco", longevity: "12h+", season: "Winter", occasion: "Night Out", dupe: "Ramz Silver" },
+  { id: 11, type: "Designer", name: "Eros Energy", brand: "Versace", topNotes: "Blood Orange, Lime", middleNotes: "Pink Pepper", baseNotes: "Oakmoss, Patchouli", longevity: "8h", season: "Summer", occasion: "Gym/Sport", dupe: "Turathi Blue" },
+  { id: 12, type: "Designer", name: "The Most Wanted", brand: "Azzaro", topNotes: "Cardamom", middleNotes: "Toffee", baseNotes: "Amberwood", longevity: "10h", season: "Winter", occasion: "Date Night", dupe: "Ansaam Silver" },
+  { id: 13, type: "Designer", name: "Gentleman Réserve Privée", brand: "Givenchy", topNotes: "Bergamot", middleNotes: "Iris, Chestnut", baseNotes: "Whiskey, Amber", longevity: "8h", season: "Fall/Winter", occasion: "Formal", dupe: "Kayaan Classic" },
+  { id: 14, type: "Designer", name: "Born in Roma Intense", brand: "Valentino", topNotes: "Vanilla", middleNotes: "Lavender", baseNotes: "Vetiver", longevity: "9h", season: "All Year", occasion: "Signature", dupe: "Lattafa Winner" },
+  { id: 15, type: "Designer", name: "Bleu de Chanel Parfum", brand: "Chanel", topNotes: "Lemon Zest", middleNotes: "Lavender, Pineapple", baseNotes: "Sandalwood, Cedar", longevity: "9h", season: "All Year", occasion: "Office", dupe: "Armaf Iconic" },
+  { id: 16, type: "Designer", name: "Prada L'Homme Intense", brand: "Prada", topNotes: "Iris", middleNotes: "Amber, Patchouli", baseNotes: "Tonka Bean, Leather", longevity: "9h", season: "Fall/Winter", occasion: "Professional", dupe: "Ajmal Evoke Silver" },
+  { id: 17, type: "Designer", name: "Spicebomb Extreme", brand: "Viktor&Rolf", topNotes: "Black Pepper", middleNotes: "Tobacco", baseNotes: "Vanilla", longevity: "11h", season: "Winter", occasion: "Social", dupe: "Charuto Tobacco" },
+  { id: 18, type: "Designer", name: "Y EDP Intense", brand: "YSL", topNotes: "Ginger, Juniper", middleNotes: "Sage, Lavender", baseNotes: "Vetiver", longevity: "10h", season: "All Year", occasion: "Office", dupe: "Fakhar Black" },
+  { id: 19, type: "Designer", name: "Ombré Leather", brand: "Tom Ford", topNotes: "Cardamom", middleNotes: "Leather, Jasmine", baseNotes: "Amber, Moss", longevity: "9h", season: "Fall/Winter", occasion: "Evening", dupe: "Rare Carbon" },
+  { id: 20, type: "Designer", name: "Acqua di Gio Profondo", brand: "Armani", topNotes: "Sea Notes", middleNotes: "Rosemary", baseNotes: "Mineral Notes", longevity: "7h", season: "Summer", occasion: "Casual", dupe: "Liam Blue" },
   
   // --- NICHE (41-80) ---
   { id: 41, type: "Niche", name: "Oud Zarian", brand: "Creed", topNotes: "Saffron, Cardamom", middleNotes: "Aged Oud, Rose", baseNotes: "Leather, Musk", longevity: "12h", season: "Winter", occasion: "Elite", dupe: "Haltane Style" },
@@ -44,7 +56,8 @@ const fragrances = [
   { id: 53, type: "Niche", name: "Safran Secret", brand: "Maison Crivelli", topNotes: "Ginger, Saffron", middleNotes: "Tuberose, Orange Blossom", baseNotes: "Caramel, Vanilla", longevity: "11h", season: "Fall/Winter", occasion: "Niche Casual", dupe: "Liquid Brun" },
   { id: 54, type: "Niche", name: "Erba Gold", brand: "Xerjoff", topNotes: "Amalfi Lemon, Orange", middleNotes: "Apple, Pear", baseNotes: "White Musk, Amber", longevity: "12h", season: "Summer", occasion: "Vacation", dupe: "Amber Oud Gold" },
   { id: 55, type: "Niche", name: "Hundred Silent Ways", brand: "Nishane", topNotes: "Peach, Mandarin", middleNotes: "Tuberose, Jasmine", baseNotes: "Vanilla, Sandalwood", longevity: "10h", season: "Spring/Fall", occasion: "Romantic", dupe: "Lattafa Ansaam Gold" },
-  // ... adding more niche like Haltane, Side Effect, Carlisle, etc.
+ { id: 8, type: "Niche", name: "Guidance", brand: "Amouage", topNotes: "Pear, Hazelnut, Olibanum", middleNotes: "Osmanthus, Rose, Saffron", baseNotes: "Sandalwood, Vanilla, Akigalawood", longevity: "16h+", season: "Fall/Winter", occasion: "Gala", dupe: "Lattafa Teriaq" },
+  { id: 9, type: "Niche", name: "Ganymede", brand: "M.A. Barrois", topNotes: "Mandarin", middleNotes: "Saffron, Violet", baseNotes: "Akigalawood, Immortelle", longevity: "14h", season: "All Year", occasion: "Artistic", dupe: "Fragrance World Sept VII" },
 
   // --- ARABIAN & VIRAL DUPES (81-100) ---
   { id: 81, type: "Arabian", name: "Khamrah", brand: "Lattafa", topNotes: "Cinnamon, Nutmeg", middleNotes: "Dates, Praline", baseNotes: "Vanilla, Tonka", longevity: "11h", season: "Winter", occasion: "Date Night", dupe: "Angels' Share Style" },
@@ -64,7 +77,9 @@ const fragrances = [
   { id: 95, type: "Arabian", name: "SNOI", brand: "Afnan", topNotes: "Blackcurrant, Bergamot", middleNotes: "Patchouli", baseNotes: "Oakmoss", longevity: "12h+", season: "All Year", occasion: "Business", dupe: "Aventus/Hacivat Blend" },
   { id: 96, type: "Arabian", name: "Lattafa Nebras", brand: "Lattafa", topNotes: "Red Berries", middleNotes: "Vanilla, Cacao", baseNotes: "Sugar, Musk", longevity: "10h", season: "Winter", occasion: "Sweet", dupe: "Eilish Style" },
   { id: 97, type: "Arabian", name: "Ameerat Al Arab", brand: "Asdaaf", topNotes: "Grape, Orange", middleNotes: "Rose, Jasmine", baseNotes: "Musk, Sandalwood", longevity: "8h", season: "All Year", occasion: "Daily", dupe: "Floral Gourmand" },
-  { id: 98, type: "Arabian", name: "Ishq Al Shuyukh Gold", brand: "Lattafa", topNotes: "Caramel, Saffron", middleNotes: "Leather", baseNotes: "Vanilla, Amber", longevity: "11h", season: "Winter", occasion: "Evening", dupe: "Rosendo No. 5 Style" },
+  { id: 1, type: "Arabian", name: "Vulcan Feu", brand: "French Avenue", topNotes: "Mango, Ginger, Lemon, Red Berries", middleNotes: "Coumarin, Jasmine, Cedar", baseNotes: "Musk, Amber, Oud, Cypriol", longevity: "11h", season: "Summer/Spring", occasion: "Statement", dupe: "God of Fire Style" },
+  { id: 10, type: "Arabian", name: "Khamrah Qahwa", brand: "Lattafa", topNotes: "Ginger, Cinnamon", middleNotes: "Coffee, Praline, Candied Fruits", baseNotes: "Vanilla, Benzoin, Tonka", longevity: "12h", season: "Winter", occasion: "Cozy Night", dupe: "Gourmand Original" },
+  {id: 98, type: "Arabian", name: "Ishq Al Shuyukh Gold", brand: "Lattafa", topNotes: "Caramel, Saffron", middleNotes: "Leather", baseNotes: "Vanilla, Amber", longevity: "11h", season: "Winter", occasion: "Evening", dupe: "Rosendo No. 5 Style" },
   { id: 99, type: "Arabian", name: "Barakkat Rouge 540", brand: "Fragrance World", topNotes: "Saffron", middleNotes: "Amberwood", baseNotes: "Cedar", longevity: "8h", season: "All Year", occasion: "Daily", dupe: "BR540 EDP Style" },
   { id: 100, type: "Arabian", name: "Mazaaji", brand: "Lattafa", topNotes: "Orange Blossom", middleNotes: "Rose", baseNotes: "White Musk", longevity: "9h", season: "Spring", occasion: "Brunch", dupe: "Elie Saab Style" },
 ];
