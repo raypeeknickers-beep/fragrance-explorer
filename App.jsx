@@ -3,13 +3,16 @@ import { createRoot } from 'react-dom/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Pyramid, Fingerprint, ShieldCheck, Target, Crown, Zap } from 'lucide-react';
 
-// --- DATABASE (20 FRAGRANCES WITH CORRECTED IMAGES) ---
+// --- THE CORRECTED ARCHIVE (20 FRAGRANCES WITH FRAGRANTICA-STYLE IMAGES) ---
 const fragrances = [
+  // DESIGNER
   { id: 1, type: "Designer", name: "Sauvage Elixir", brand: "Dior", image: "https://fimgs.net/mdimg/perfume/m.68417.jpg", topNotes: ["Cinnamon"], middleNotes: ["Lavender"], baseNotes: ["Sandalwood"], dupe: { name: "Asad", brand: "Lattafa", price: "28 CHF" }},
   { id: 2, type: "Designer", name: "Le Male Elixir", brand: "JPG", image: "https://fimgs.net/mdimg/perfume/m.79355.jpg", topNotes: ["Mint"], middleNotes: ["Lavender"], baseNotes: ["Honey"], dupe: { name: "Ramz Silver", brand: "Lattafa", price: "22 CHF" }},
   { id: 3, type: "Designer", name: "Most Wanted", brand: "Azzaro", image: "https://fimgs.net/mdimg/perfume/m.73970.jpg", topNotes: ["Ginger"], middleNotes: ["Wood"], baseNotes: ["Vanilla"], dupe: { name: "Ansaam Silver", brand: "Lattafa", price: "32 CHF" }},
   { id: 4, type: "Designer", name: "MYSLF", brand: "YSL", image: "https://fimgs.net/mdimg/perfume/m.84074.jpg", topNotes: ["Bergamot"], middleNotes: ["Orange Blossom"], baseNotes: ["Ambrofix"], dupe: { name: "Sheikh Al Shuyukh", brand: "Lattafa", price: "25 CHF" }},
   { id: 5, type: "Designer", name: "Ombré Leather", brand: "Tom Ford", image: "https://fimgs.net/mdimg/perfume/m.49238.jpg", topNotes: ["Cardamom"], middleNotes: ["Leather"], baseNotes: ["Amber"], dupe: { name: "Afkar", brand: "Lattafa", price: "34 CHF" }},
+
+  // NICHE
   { id: 6, type: "Niche", name: "Aventus", brand: "Creed", image: "https://fimgs.net/mdimg/perfume/m.9828.jpg", topNotes: ["Pineapple"], middleNotes: ["Birch"], baseNotes: ["Musk"], dupe: { name: "Club de Nuit", brand: "Armaf", price: "35 CHF" }},
   { id: 7, type: "Niche", name: "Naxos", brand: "Xerjoff", image: "https://fimgs.net/mdimg/perfume/m.30478.jpg", topNotes: ["Honey"], middleNotes: ["Tobacco"], baseNotes: ["Vanilla"], dupe: { name: "Voux Elegante", brand: "Emir", price: "45 CHF" }},
   { id: 8, type: "Niche", name: "Layton", brand: "PDM", image: "https://fimgs.net/mdimg/perfume/m.40344.jpg", topNotes: ["Apple"], middleNotes: ["Lavender"], baseNotes: ["Vanilla"], dupe: { name: "Detour Noir", brand: "Al Haramain", price: "38 CHF" }},
@@ -17,13 +20,15 @@ const fragrances = [
   { id: 10, type: "Niche", name: "Ganymede", brand: "M.A. Barrois", image: "https://fimgs.net/mdimg/perfume/m.54733.jpg", topNotes: ["Saffron"], middleNotes: ["Violet"], baseNotes: ["Akigalawood"], dupe: { name: "Sept VII", brand: "Paris Corner", price: "52 CHF" }},
   { id: 11, type: "Niche", name: "Side Effect", brand: "Initio", image: "https://fimgs.net/mdimg/perfume/m.42258.jpg", topNotes: ["Rum"], middleNotes: ["Tobacco"], baseNotes: ["Cinnamon"], dupe: { name: "After Effect", brand: "FW", price: "50 CHF" }},
   { id: 12, type: "Niche", name: "Hacivat", brand: "Nishane", image: "https://fimgs.net/mdimg/perfume/m.44174.jpg", topNotes: ["Pineapple"], middleNotes: ["Jasmine"], baseNotes: ["Oakmoss"], dupe: { name: "Imperium", brand: "Electimuss", price: "110 CHF" }},
+
+  // ARABIAN / DUPES
   { id: 13, type: "Arabian", name: "Khamrah", brand: "Lattafa", image: "https://fimgs.net/mdimg/perfume/m.75831.jpg", topNotes: ["Cinnamon"], middleNotes: ["Dates"], baseNotes: ["Vanilla"], dupe: { name: "Lattafa Original", brand: "Lattafa", price: "45 CHF" }},
-  { id: 14, type: "Arabian", name: "Turathi Blue", brand: "Afnan", image: "https://fimgs.net/mdimg/perfume/m.68213.jpg", topNotes: ["Grapefruit"], middleNotes: ["Amber"], baseNotes: ["Musk"], dupe: { name: "Tygar Alt", brand: "Afnan", price: "35 CHF" }},
+  { id: 14, type: "Arabian", name: "Turathi Blue", brand: "Afnan", image: "https://fimgs.net/mdimg/perfume/m.68213.jpg", topNotes: ["Grapefruit"], middleNotes: ["Amber"], baseNotes: ["Musk"], dupe: { name: "Tygar Clone", brand: "Afnan", price: "35 CHF" }},
   { id: 15, type: "Arabian", name: "Club de Nuit Iconic", brand: "Armaf", image: "https://fimgs.net/mdimg/perfume/m.78010.jpg", topNotes: ["Grapefruit"], middleNotes: ["Ginger"], baseNotes: ["Sandalwood"], dupe: { name: "BDC Alt", brand: "Armaf", price: "40 CHF" }},
-  { id: 16, type: "Dupes", name: "Detour Noir", brand: "Al Haramain", image: "https://fimgs.net/mdimg/perfume/m.69317.jpg", topNotes: ["Apple"], middleNotes: ["Lavender"], baseNotes: ["Vanilla"], dupe: { name: "Layton Clone", brand: "Al Haramain", price: "38 CHF" }},
+  { id: 16, type: "Dupes", name: "Detour Noir", brand: "Al Haramain", image: "https://fimgs.net/mdimg/perfume/m.69317.jpg", topNotes: ["Apple"], middleNotes: ["Lavender"], baseNotes: ["Vanilla"], dupe: { name: "Layton Alt", brand: "Al Haramain", price: "38 CHF" }},
   { id: 17, type: "Dupes", name: "Asad", brand: "Lattafa", image: "https://fimgs.net/mdimg/perfume/m.70420.jpg", topNotes: ["Black Pepper"], middleNotes: ["Coffee"], baseNotes: ["Vanilla"], dupe: { name: "Sauvage Alt", brand: "Lattafa", price: "28 CHF" }},
-  { id: 18, type: "Arabian", name: "Shaghaf Oud", brand: "Swiss Arabian", image: "https://fimgs.net/mdimg/perfume/m.51230.jpg", topNotes: ["Saffron"], middleNotes: ["Oud"], baseNotes: ["Praline"], dupe: { name: "Oud Bouquet Alt", brand: "Swiss Arabian", price: "45 CHF" }},
-  { id: 19, type: "Arabian", name: "Hawas", brand: "Rasasi", image: "https://fimgs.net/mdimg/perfume/m.33588.jpg", topNotes: ["Apple"], middleNotes: ["Plum"], baseNotes: ["Ambergris"], dupe: { name: "Invictus Alt", brand: "Rasasi", price: "55 CHF" }},
+  { id: 18, type: "Arabian", name: "Shaghaf Oud", brand: "Swiss Arabian", image: "https://fimgs.net/mdimg/perfume/m.51230.jpg", topNotes: ["Saffron"], middleNotes: ["Oud", "Rose"], baseNotes: ["Praline"], dupe: { name: "Oud Bouquet Alt", brand: "Swiss Arabian", price: "45 CHF" }},
+  { id: 19, type: "Arabian", name: "Hawas", brand: "Rasasi", image: "https://fimgs.net/mdimg/perfume/m.33588.jpg", topNotes: ["Apple"], middleNotes: ["Plum"], baseNotes: ["Ambergris"], dupe: { name: "Invictus Aqua Alt", brand: "Rasasi", price: "55 CHF" }},
   { id: 20, type: "Dupes", name: "9PM", brand: "Afnan", image: "https://fimgs.net/mdimg/perfume/m.64205.jpg", topNotes: ["Apple"], middleNotes: ["Cinnamon"], baseNotes: ["Vanilla"], dupe: { name: "Ultra Male Alt", brand: "Afnan", price: "30 CHF" }}
 ];
 
@@ -31,13 +36,13 @@ const creators = [
   { 
     id: "noel", 
     name: "Noel Thomas", 
-    image: "https://lh3.googleusercontent.com/d/1Zt1S-qZ-zI-U2vX-K7_P_Y5_Z-zI-U2v", // Updated with profile
+    profileImg: "https://yt3.ggpht.com/channels4_profile=s800-c-k-c0x00ffffff-no-rj", // Sourced from your file
     icon: <Target size={20}/>, 
     tagline: "THE TOTAL LOOK.", 
-    desc: "Noel Thomas bridges the gap between high-fashion silhouettes and niche perfumery. His approach focuses on the 'total look,' where a fragrance is the invisible fabric that completes an outfit's silhouette." 
+    desc: "Noel Thomas is the architect of the 'Complete Aesthetic.' He believes a fragrance is the final layer of a silhouette. His curation focuses on high-fashion integration, prioritizing clean, niche, and avant-garde scents that complement luxury menswear and minimalist design." 
   },
-  { id: "jeremy", name: "Jeremy Fragrance", icon: <Crown size={20}/>, tagline: "POWER.", desc: "The global authority on performance and compliments. Jeremy's philosophy is rooted in sillage and the social impact of scent." },
-  { id: "cologneboy", name: "TheCologneBoy", icon: <Zap size={20}/>, tagline: "MODERN ESSENTIALS.", desc: "The pulse of the new generation. Identifying trending 'bangers' and high-value fragrances that punch above their price point." }
+  { id: "jeremy", name: "Jeremy Fragrance", profileImg: "https://fimgs.net/mdimg/perfume/m.1.jpg", icon: <Crown size={20}/>, tagline: "STRENGTH & POWER.", desc: "The global authority on mass-appeal. Jeremy's philosophy centers on performance, projection, and compliments. He curates scents that provide immediate confidence and command presence." },
+  { id: "cologneboy", name: "TheCologneBoy", profileImg: "https://fimgs.net/mdimg/perfume/m.2.jpg", icon: <Zap size={20}/>, tagline: "CULTURAL HITS.", desc: "The bridge between street culture and luxury perfumery. He specializes in identifying trending 'bangers'—fragrances that resonate with the current generation." }
 ];
 
 export default function App() {
@@ -59,7 +64,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#030303] text-[#f0f0f0] font-light selection:bg-amber-500 selection:text-black">
-      {/* NAV */}
+      
+      {/* NAVIGATION */}
       <nav className="fixed top-0 w-full z-[100] border-b border-white/[0.03] bg-black/60 backdrop-blur-3xl">
         <div className="max-w-[1600px] mx-auto px-12 h-24 flex items-center justify-between">
           <div className="flex flex-col cursor-pointer" onClick={() => {setActiveTab('archive'); setFilter('All');}}>
@@ -76,9 +82,11 @@ export default function App() {
       <AnimatePresence mode="wait">
         {activeTab === 'archive' ? (
           <motion.main key="arch" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-48 pb-20 px-12 max-w-[1600px] mx-auto">
+            
+            {/* SEARCH & FILTER */}
             <div className="flex flex-col items-center mb-24 space-y-12">
               <div className="relative w-full max-w-2xl">
-                <input type="text" placeholder="SEARCH..." className="w-full bg-transparent border-b border-white/10 py-6 px-2 focus:outline-none focus:border-amber-500 transition-all text-2xl font-extralight tracking-widest uppercase" onChange={(e) => setSearch(e.target.value)} />
+                <input type="text" placeholder="SEARCH ARCHIVE..." className="w-full bg-transparent border-b border-white/10 py-6 px-2 focus:outline-none focus:border-amber-500 transition-all text-2xl font-extralight tracking-widest uppercase" onChange={(e) => setSearch(e.target.value)} />
                 <Search className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-700" size={24} />
               </div>
               <div className="flex flex-wrap justify-center gap-3">
@@ -87,11 +95,18 @@ export default function App() {
                 ))}
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            {/* GRID */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
               {filtered.map((f) => (
-                <motion.div key={f.id} layout whileHover={{ y: -8 }} onClick={() => setSelectedFrag(f)} className="group cursor-pointer bg-white/[0.01] border border-white/[0.05] p-8 hover:bg-white/[0.03] transition-all">
-                  <div className="aspect-[3/4] mb-6 flex items-center justify-center bg-white rounded-sm p-4"><img src={f.image} className="h-full object-contain" /></div>
-                  <div className="text-center"><p className="text-[8px] text-amber-500 font-black tracking-widest uppercase mb-1">{f.brand}</p><h3 className="text-md font-light tracking-widest uppercase text-white">{f.name}</h3></div>
+                <motion.div key={f.id} layout whileHover={{ y: -10 }} onClick={() => setSelectedFrag(f)} className="group cursor-pointer bg-white/[0.01] border border-white/[0.05] p-10 hover:bg-white/[0.03] transition-all">
+                  <div className="aspect-[3/4] mb-8 flex items-center justify-center bg-white rounded-sm p-6 overflow-hidden">
+                    <img src={f.image} className="h-full object-contain grayscale-[0.3] group-hover:grayscale-0 transition-all group-hover:scale-110" alt={f.name} />
+                  </div>
+                  <div className="text-center">
+                    <p className="text-[8px] text-amber-500 font-black tracking-widest uppercase mb-1">{f.brand} • {f.type}</p>
+                    <h3 className="text-lg font-light tracking-widest uppercase text-white">{f.name}</h3>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -103,21 +118,26 @@ export default function App() {
                 {creators.map((c) => (
                   <button key={c.id} onClick={() => setSelCreatorId(c.id)} className={`w-full text-left p-8 border transition-all duration-500 flex items-center gap-6 ${selCreatorId === c.id ? 'bg-amber-500/5 border-amber-500/30' : 'bg-transparent border-white/5 hover:border-white/20'}`}>
                     <div className={selCreatorId === c.id ? 'text-amber-500' : 'text-gray-700'}>{c.icon}</div>
-                    <div><h3 className={`text-xl font-light tracking-widest uppercase ${selCreatorId === c.id ? 'text-white' : 'text-gray-500'}`}>{c.name}</h3><p className="text-[9px] text-amber-500/60 font-bold tracking-[0.2em] mt-1">{c.tagline}</p></div>
+                    <div>
+                      <h3 className={`text-xl font-light tracking-widest uppercase ${selCreatorId === c.id ? 'text-white' : 'text-gray-500'}`}>{c.name}</h3>
+                      <p className="text-[9px] text-amber-500/60 font-bold tracking-[0.2em] mt-1">{c.tagline}</p>
+                    </div>
                   </button>
                 ))}
               </div>
-              <div className="flex-1 bg-white/[0.02] border border-white/5 p-16 relative overflow-hidden min-h-[400px]">
-                <AnimatePresence mode="wait"><motion.div key={selCreatorId} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                  <div className="flex items-start gap-12 mb-12">
-                    {currentCreator.image && <img src={currentCreator.image} className="w-32 h-32 rounded-full object-cover border-2 border-amber-500/30" />}
-                    <div>
-                      <ShieldCheck className="text-amber-500/30 mb-4" size={40} />
-                      <h2 className="text-5xl font-bold text-white uppercase tracking-tighter italic leading-none">{currentCreator.name}</h2>
+              <div className="flex-1 bg-white/[0.02] border border-white/5 p-16 lg:p-24 relative overflow-hidden min-h-[500px]">
+                <AnimatePresence mode="wait">
+                  <motion.div key={selCreatorId} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.4 }}>
+                    <div className="flex items-center gap-8 mb-12">
+                      <img src={currentCreator.profileImg} className="w-24 h-24 rounded-full border border-amber-500/50 object-cover" alt={currentCreator.name} />
+                      <div>
+                        <ShieldCheck className="text-amber-500/30 mb-2" size={32} />
+                        <h2 className="text-6xl font-bold text-white uppercase tracking-tighter leading-none italic">{currentCreator.name}</h2>
+                      </div>
                     </div>
-                  </div>
-                  <p className="text-xl text-gray-400 font-extralight leading-relaxed max-w-2xl">{currentCreator.desc}</p>
-                </motion.div></AnimatePresence>
+                    <p className="text-xl text-gray-400 font-extralight leading-relaxed max-w-2xl">{currentCreator.desc}</p>
+                  </motion.div>
+                </AnimatePresence>
                 <div className="absolute -bottom-10 -right-10 text-[15vw] font-black text-white/[0.02] pointer-events-none uppercase select-none">{selCreatorId}</div>
               </div>
             </div>
@@ -129,20 +149,31 @@ export default function App() {
       <AnimatePresence>
         {selectedFrag && (
           <div className="fixed inset-0 z-[200] flex items-center justify-center p-8 bg-black/95 backdrop-blur-2xl">
-            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="bg-[#080808] max-w-6xl w-full h-[80vh] border border-white/10 flex flex-col md:flex-row relative">
+            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="bg-[#080808] max-w-6xl w-full h-[85vh] border border-white/10 flex flex-col md:flex-row relative">
               <button onClick={() => setSelectedFrag(null)} className="absolute top-8 right-8 text-white/30 hover:text-white z-50"><X size={32} /></button>
-              <div className="flex-1 bg-white p-12 flex items-center justify-center"><img src={selectedFrag.image} className="max-h-full object-contain" /></div>
-              <div className="flex-1 p-12 overflow-y-auto">
-                <p className="text-amber-500 font-black tracking-[0.5em] text-[9px] uppercase mb-4">{selectedFrag.brand} • {selectedFrag.type}</p>
-                <h2 className="text-5xl font-bold text-white uppercase tracking-tighter mb-12 leading-tight">{selectedFrag.name}</h2>
-                <div className="space-y-10">
+              <div className="flex-1 bg-white p-16 flex items-center justify-center">
+                <img src={selectedFrag.image} className="max-h-full object-contain scale-110" alt={selectedFrag.name} />
+              </div>
+              <div className="flex-1 p-16 overflow-y-auto">
+                <p className="text-amber-500 font-black tracking-[0.5em] text-[10px] uppercase mb-6">{selectedFrag.brand} • {selectedFrag.type}</p>
+                <h2 className="text-6xl font-bold text-white uppercase tracking-tighter mb-16 leading-none">{selectedFrag.name}</h2>
+                <div className="space-y-12">
                   <div>
-                    <div className="flex items-center gap-3 text-white/20 mb-4"><Pyramid size={16} /><span className="text-[9px] tracking-[0.4em] font-black uppercase">Scent Profile</span></div>
-                    <div className="flex flex-wrap gap-2">{selectedFrag.topNotes.concat(selectedFrag.middleNotes, selectedFrag.baseNotes).map(n => <span key={n} className="px-3 py-1 bg-white/5 border border-white/5 text-[11px] text-white/70 italic">{n}</span>)}</div>
+                    <div className="flex items-center gap-3 text-white/20 mb-6"><Pyramid size={18} /><span className="text-[10px] tracking-[0.4em] font-black uppercase">Scent Profile</span></div>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedFrag.topNotes.concat(selectedFrag.middleNotes, selectedFrag.baseNotes).map(n => (
+                        <span key={n} className="px-4 py-1.5 bg-white/5 border border-white/5 text-xs text-white/80 rounded-sm italic">{n}</span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="bg-amber-500/[0.03] border border-amber-500/10 p-6">
-                    <div className="flex items-center justify-between mb-2"><div className="flex items-center gap-2 text-amber-500"><Fingerprint size={18} /><h4 className="text-[9px] font-black tracking-[0.2em] uppercase">Value Match</h4></div><span className="text-amber-500 text-[10px] font-bold">{selectedFrag.dupe.price}</span></div>
-                    <p className="text-sm text-white/60 italic font-extralight">"<span className="text-white font-bold">{selectedFrag.dupe.name}</span> by {selectedFrag.dupe.brand}."</p>
+                  <div className="bg-amber-500/[0.03] border border-amber-500/10 p-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3 text-amber-500"><Fingerprint size={20} /><h4 className="text-[10px] font-black tracking-[0.3em] uppercase">Value Replication</h4></div>
+                      <span className="text-amber-500 text-[10px] font-bold tracking-widest">{selectedFrag.dupe.price}</span>
+                    </div>
+                    <p className="text-sm text-white/60 italic font-extralight leading-relaxed">
+                      "A near-perfect chemical match found in <span className="text-white font-bold">{selectedFrag.dupe.name}</span> by {selectedFrag.dupe.brand}."
+                    </p>
                   </div>
                 </div>
               </div>
